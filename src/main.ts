@@ -3,10 +3,12 @@ import { invoke } from "@tauri-apps/api/tauri";
 let greetInputEl: HTMLInputElement | null;
 let greetMsgEl: HTMLElement | null;
 
+const canvas = document.createElement("canvas");
+
 async function greet() {
   if (greetMsgEl && greetInputEl) {
     // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-    greetMsgEl.textContent = await invoke("greet", {
+    greetMsgEl.textContent = `${canvas.transferControlToOffscreen === undefined}` + await invoke("greet", {
       name: greetInputEl.value,
     });
   }
